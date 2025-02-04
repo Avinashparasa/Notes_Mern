@@ -6,7 +6,6 @@ const multer = require("multer");
 
 const router = express.Router();
 
-// Configure Multer Storage
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads/"); // Store files in the 'uploads' folder
@@ -18,7 +17,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-/* 📌 ROUTE 1: Fetch all notes (GET) */
+
 router.get("/fetchnotes", fetchuser, async (req, res) => {
   try {
     const notes = await Note.find({ user: req.user.id });
@@ -29,7 +28,7 @@ router.get("/fetchnotes", fetchuser, async (req, res) => {
   }
 });
 
-/* 📌 ROUTE 2: Create a new note (POST) */
+
 router.post(
   "/addnote",
   fetchuser,
@@ -108,7 +107,7 @@ router.put(
   }
 );
 
-/* 📌 ROUTE 4: Delete a note (DELETE) */
+
 router.delete("/deletenote/:id", fetchuser, async (req, res) => {
   try {
     let note = await Note.findById(req.params.id);
@@ -126,7 +125,6 @@ router.delete("/deletenote/:id", fetchuser, async (req, res) => {
   }
 });
 
-/* 📌 ROUTE 5: Delete all notes (DELETE) */
 router.delete("/deleteallnotes", fetchuser, async (req, res) => {
   try {
     await Note.deleteMany({ user: req.user.id });
@@ -138,7 +136,7 @@ router.delete("/deleteallnotes", fetchuser, async (req, res) => {
 });
 
 
-/* 📌 ROUTE 6: Toggle Favourite Status (PUT) */
+
 router.put("/togglenotefavourite/:id", fetchuser, async (req, res) => {
   
   try {
@@ -163,7 +161,6 @@ router.put("/togglenotefavourite/:id", fetchuser, async (req, res) => {
   }
 });
 
-/* 📌 ROUTE 7: Fetch Favourite Notes (GET) */
 router.get("/fetchfavourites", fetchuser, async (req, res) => {
   try {
     const favouriteNotes = await Note.find({ user: req.user.id, favourite: true });

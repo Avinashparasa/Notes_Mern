@@ -84,16 +84,16 @@ router.post('/login',[
     body('password','Enter a valid password').exists()
 ], async (req,res) => {
     let success = false;
-    // if there are errors, return bad request and the errors
+   
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({success: success, errors: errors.array() });
     }
 
     const {email,password} = req.body;
-    // if any error occurs
+   
     try {
-    // find email alreay exists or not
+    
     let loginUser = await User.findOne({email: email});
 
     // if email already exists
@@ -109,7 +109,7 @@ router.post('/login',[
         return res.status(401).json({success: success, error: 'email or pasword is incorrect!!'});
     }
 
-    // create json web token
+ 
     const data = {
         user: {
             // get user id

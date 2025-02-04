@@ -10,8 +10,8 @@ const AllNotes = () => {
   const context = useContext(NoteContext);
   const { notes, getNotes, editNote, toggleFavourite } = context;
   
-  const [searchQuery, setSearchQuery] = useState(""); // State for search query
-  const [sortOrder, setSortOrder] = useState("newest"); // State for sorting order
+  const [searchQuery, setSearchQuery] = useState(""); 
+  const [sortOrder, setSortOrder] = useState("newest"); 
 
   useEffect(() => {
     if (localStorage.getItem("auth-token")) {
